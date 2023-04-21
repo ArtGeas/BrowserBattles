@@ -58,10 +58,10 @@ class FuryPunch(Skill):
         # TODO именно здесь происходит уменшение стамины у игрока применяющего умение и
         # TODO уменьшение здоровья цели.
         # TODO результат применения возвращаем строкой
-        if super()._is_stamina_enough():
-            return f"{self.user.name} использует {self.name} и наносит {self.damage} урона сопернику."
-        else:
-            return f"{self.user.name} попытался использовать {self.name}, но у него не хватило выносливости."
+
+        self.user.stamina -= self.stamina
+        self.target.hp -= self.damage
+        return self.user.use_skill(target=self.target)
 
 
 class HardShot(Skill):
@@ -70,4 +70,6 @@ class HardShot(Skill):
     damage = 15
 
     def skill_effect(self):
-        pass
+        self.user.stamina -= self.stamina
+        self.target.hp -= self.damage
+        return self.user.use_skill(target=self.target)
