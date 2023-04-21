@@ -13,7 +13,7 @@ class Armor:
 
 @dataclass
 class Weapon:
-    pass
+
 
     @property
     def damage(self):
@@ -50,8 +50,9 @@ class Equipment:
     @staticmethod
     def _get_equipment_data() -> EquipmentData:
         # TODO этот метод загружает json в переменную EquipmentData
-        equipment_file = open("./data/equipment.json")
-        data = json.load( ... )
+        with open("./data/equipment.json") as equipment_file:
+            data = json.load(equipment_file)
+
         equipment_schema = marshmallow_dataclass.class_schema( ... )
         try:
             return equipment_schema().load(data)
