@@ -31,8 +31,8 @@ class Weapon:
 @dataclass
 class EquipmentData:
     # TODO содержит 2 списка - с оружием и с броней
-    weapon_list: List
-    armor_list: List
+    weapons: List
+    armors: List
 
 
 class Equipment:
@@ -62,7 +62,7 @@ class Equipment:
         with open("./data/equipment.json") as equipment_file:
             data = json.load(equipment_file)
 
-        equipment_schema = marshmallow_dataclass.class_schema( ... )
+        equipment_schema = marshmallow_dataclass.class_schema(EquipmentData)
         try:
             return equipment_schema().load(data)
         except marshmallow.exceptions.ValidationError:
