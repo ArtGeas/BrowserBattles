@@ -8,22 +8,31 @@ import json
 
 @dataclass
 class Armor:
-    pass
+    id: int
+    name: str
+    defence: float
+    stamina_per_turn: float
 
 
 @dataclass
 class Weapon:
 
+    id: int
+    name: str
+    min_damage: float
+    max_damage: float
+    stamina_per_hit: float
 
     @property
     def damage(self):
-        pass
+        return uniform(self.min_damage, self.max_damage)
 
 
 @dataclass
 class EquipmentData:
     # TODO содержит 2 списка - с оружием и с броней
-    pass
+    weapon_list: List
+    armor_list: List
 
 
 class Equipment:
