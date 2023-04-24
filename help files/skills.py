@@ -55,13 +55,13 @@ class FuryPunch(Skill):
     def skill_effect(self):
         # TODO логика использования скилла -> return str
         # TODO в классе нам доступны экземпляры user и target - можно использовать любые их методы
-        # TODO именно здесь происходит уменшение стамины у игрока применяющего умение и
+        # TODO именно здесь происходит уменьшение стамины у игрока применяющего умение и
         # TODO уменьшение здоровья цели.
         # TODO результат применения возвращаем строкой
 
         self.user.stamina -= self.stamina
         self.target.hp -= self.damage
-        return self.user.use_skill(target=self.target)
+        return f'{self.user.name} использует {self.name} и наносит {self.damage} урона сопернику.'
 
 
 class HardShot(Skill):
@@ -72,4 +72,4 @@ class HardShot(Skill):
     def skill_effect(self):
         self.user.stamina -= self.stamina
         self.target.hp -= self.damage
-        return self.user.use_skill(target=self.target)
+        return f'{self.user.name} использует {self.name} и наносит {self.damage} урона сопернику.'

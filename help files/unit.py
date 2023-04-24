@@ -49,7 +49,14 @@ class BaseUnit(ABC):
         #  и возвращаем предполагаемый урон для последующего вывода пользователю в текстовом виде
 
         attack_damage = self.weapon.damage * self.unit_class.attack
-        target_armor = target.armor.defence * target.unit_class.armor
+
+        if target.stamina >= target.armor.stamina_per_turn:
+            target.stamina = target.stamina - target.armor.stamina_per_turn
+            target_armor = target.armor.defence * target.unit_class.armor
+        else:
+            target_armor = 0
+
+        self.stamina = self.stamina - self.weapon.stamina_per_hit
         damage = attack_damage - target_armor
 
         return damage
@@ -57,7 +64,8 @@ class BaseUnit(ABC):
     def get_damage(self, damage: int) -> Optional[int]:
         # TODO получение урона целью
         #      присваиваем новое значение для аттрибута self.hp
-        pass
+        self.hp = self.hp - damage
+        return damage
 
     @abstractmethod
     def hit(self, target: BaseUnit) -> str:
@@ -73,9 +81,12 @@ class BaseUnit(ABC):
         Навык использован
         Если же умение не использовано тогда выполняем функцию
         self.unit_class.skill.use(user=self, target=target)
-        и уже эта функция вернем нам строку которая характеризует выполнение умения
+        и уже эта функция вернет нам строку которая характеризует выполнение умения
         """
-        pass
+        if self._is_skill_used:
+            return 'Навык использован.'
+        else:
+            self.unit_class.skill.use(user=self, target=target)
 
 
 class PlayerUnit(BaseUnit):
@@ -87,11 +98,18 @@ class PlayerUnit(BaseUnit):
         вызывается функция self._count_damage(target)
         а также возвращается результат в виде строки
         """
-        pass
+
         # TODO результат функции должен возвращать следующие строки:
-        f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} соперника и наносит {damage} урона."
-        f"{self.name} используя {self.weapon.name} наносит удар, но {target.armor.name} cоперника его останавливает."
-        f"{self.name} попытался использовать {self.weapon.name}, но у него не хватило выносливости."
+
+        if self.stamina >= self.weapon.stamina_per_hit:
+            damage = self._count_damage(target)
+            if damage > target.armor.defence * target.unit_class.armor:
+                return f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} соперника и наносит {damage} урона."
+            else:
+                return f"{self.name} используя {self.weapon.name} наносит удар, но {target.armor.name} cоперника его останавливает."
+        else:
+            return f"{self.name} попытался использовать {self.weapon.name}, но у него не хватило выносливости."
+
 
 class EnemyUnit(BaseUnit):
 
@@ -102,7 +120,7 @@ class EnemyUnit(BaseUnit):
         (он должен делать это автоматически и только 1 раз за бой).
         Например, для этих целей можно использовать функцию randint из библиотеки random.
         Если умение не применено, противник наносит простой удар, где также используется
-        функция _count_damage(target
+        функция _count_damage(target)
         """
         # TODO результат функции должен возвращать результат функции skill.use или же следующие строки:
         f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} и наносит Вам {damage} урона."
