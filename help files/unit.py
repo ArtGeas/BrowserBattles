@@ -14,13 +14,11 @@ class BaseUnit(ABC):
         """
         При инициализации класса Unit используем свойства класса UnitClass
         """
-        self.name = ...
+        self.name = name
         self.unit_class = unit_class
         self.hp = unit_class.max_health
         self.stamina = unit_class.max_stamina
-        self.weapon = ...
-        self.armor = ...
-        self._is_skill_used = ...
+        self._is_skill_used = False
 
     @property
     def health_points(self):
@@ -32,10 +30,12 @@ class BaseUnit(ABC):
 
     def equip_weapon(self, weapon: Weapon):
         # TODO присваиваем нашему герою новое оружие
+        self.weapon = weapon
         return f"{self.name} экипирован оружием {self.weapon.name}"
 
     def equip_armor(self, armor: Armor):
         # TODO одеваем новую броню
+        self.armor = armor
         return f"{self.name} экипирован броней {self.weapon.name}"
 
     def _count_damage(self, target: BaseUnit) -> int:
@@ -47,6 +47,9 @@ class BaseUnit(ABC):
         #  если у защищающегося нехватает выносливости - его броня игнорируется
         #  после всех расчетов цель получает урон - target.get_damage(damage)
         #  и возвращаем предполагаемый урон для последующего вывода пользователю в текстовом виде
+
+
+
         return damage
 
     def get_damage(self, damage: int) -> Optional[int]:
