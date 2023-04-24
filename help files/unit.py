@@ -48,7 +48,9 @@ class BaseUnit(ABC):
         #  после всех расчетов цель получает урон - target.get_damage(damage)
         #  и возвращаем предполагаемый урон для последующего вывода пользователю в текстовом виде
 
-
+        attack_damage = self.weapon.damage * self.unit_class.attack
+        target_armor = target.armor.defence * target.unit_class.armor
+        damage = attack_damage - target_armor
 
         return damage
 
