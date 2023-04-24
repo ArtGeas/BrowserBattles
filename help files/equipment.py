@@ -42,19 +42,48 @@ class Equipment:
 
     def get_weapon(self, weapon_name) -> Weapon:
         # TODO возвращает объект оружия по имени
-        pass
+        try:
+            weapon_index = self.equipment.weapons.index(weapon_name)
+            weapon: dict = self.equipment.weapons[weapon_index]
+            return Weapon(id=weapon['id'],
+                          name=weapon['name'],
+                          min_damage=weapon['min_damage'],
+                          max_damage=weapon['max_damage'],
+                          stamina_per_hit=weapon['stamina_per_hit'])
+        except ValueError:
+            print('ValueError')
 
     def get_armor(self, armor_name) -> Armor:
         # TODO возвращает объект брони по имени
-        pass
+        try:
+            armor_index = self.equipment.armors.index(armor_name)
+            armor: dict = self.equipment.armors[armor_index]
+            return Armor(id=armor['id'],
+                          name=armor['name'],
+                          defence=armor['defence'],
+                          stamina_per_turn=armor['stamina_per_turn'])
+        except ValueError:
+            print('ValueError')
 
     def get_weapons_names(self) -> list:
         # TODO возвращаем список с оружием
-        pass
+        try:
+            weapon_list: list = []
+            for weapon in self.equipment.weapons:
+                weapon_list.append(weapon['name'])
+            return weapon_list
+        except ValueError:
+            print('ValueError')
 
     def get_armors_names(self) -> list:
         # TODO возвращаем список с броней
-        pass
+        try:
+            armor_list: list = []
+            for armor in self.equipment.armors:
+                armor_list.append(armor['name'])
+            return armor_list
+        except ValueError:
+            print('ValueError')
 
     @staticmethod
     def _get_equipment_data() -> EquipmentData:
