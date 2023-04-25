@@ -113,6 +113,17 @@ class PlayerUnit(BaseUnit):
 
 class EnemyUnit(BaseUnit):
 
+    def _hit_checkout(self, target: BaseUnit) -> str:
+
+        if self.stamina >= self.weapon.stamina_per_hit:
+            damage = self._count_damage(target)
+            if damage > target.armor.defence * target.unit_class.armor:
+                return f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} и наносит Вам {damage} урона."
+            else:
+                return f"{self.name} используя {self.weapon.name} наносит удар, но Ваш(а) {target.armor.name} его останавливает."
+        else:
+            return f"{self.name} попытался использовать {self.weapon.name}, но у него не хватило выносливости."
+
     def hit(self, target: BaseUnit) -> str:
         """
         функция удар соперника
@@ -123,8 +134,13 @@ class EnemyUnit(BaseUnit):
         функция _count_damage(target)
         """
         # TODO результат функции должен возвращать результат функции skill.use или же следующие строки:
-        f"{self.name} используя {self.weapon.name} пробивает {target.armor.name} и наносит Вам {damage} урона."
-        f"{self.name} используя {self.weapon.name} наносит удар, но Ваш(а) {target.armor.name} его останавливает."
-        f"{self.name} попытался использовать {self.weapon.name}, но у него не хватило выносливости."
 
-
+        using_skill = bool(randint(1, 0))
+        if using_skill:
+            if not self._is_skill_used:
+                self.unit_class.skill.use(user=self, target=target)
+                self._is_skill_used = True
+            else:
+                self._hit_checkout(self, target)
+        else:
+            self._hit_checkout(self, target)
