@@ -59,7 +59,7 @@ def use_skill():
 @app.route("/fight/pass-turn")
 def pass_turn():
     # TODO кнопка пропус хода
-    # TODO логика пркатикчески идентична предыдущему эндпоинту
+    # TODO логика практикчески идентична предыдущему эндпоинту
     # TODO однако вызываем здесь функцию следующий ход (arena.next_turn())
     if arena.game_is_running:
         result = arena.next_turn()
