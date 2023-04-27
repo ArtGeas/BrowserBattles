@@ -30,6 +30,7 @@ def start_fight():
     arena.start_game(player=heroes['player'], enemy=heroes['enemy'])
     return render_template('fight.html', heroes=heroes)
 
+
 @app.route("/fight/hit")
 def hit():
     # TODO кнопка нанесения удара
@@ -37,7 +38,7 @@ def hit():
     # TODO если игра идет - вызываем метод player.hit() экземпляра класса арены
     # TODO если игра не идет - пропускаем срабатывание метода (простот рендерим шаблон с текущими данными)
     if arena.game_is_running:
-        result = arena.player.hit()
+        result = arena.player.hit(arena.enemy)
     else:
         result = arena.battle_result
 
@@ -109,6 +110,7 @@ def choose_hero():
         heroes['player'] = player
         return redirect(url_for('choose_enemy'))
 
+
 @app.route("/choose-enemy/", methods=['post', 'get'])
 def choose_enemy():
     # TODO кнопка выбор соперников. 2 метода GET и POST
@@ -142,6 +144,7 @@ def choose_enemy():
 
         heroes['enemy'] = enemy
         return redirect(url_for('start_fight'))
+
 
 if __name__ == "__main__":
     app.run(port=25000)
