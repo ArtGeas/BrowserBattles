@@ -48,7 +48,12 @@ def hit():
 def use_skill():
     # TODO кнопка использования скилла
     # TODO логика практически идентична предыдущему эндпоинту
-    pass
+    if arena.game_is_running:
+        result = arena.player_use_skill()
+    else:
+        result = arena.battle_result
+
+    return render_template('fight.html', heroes=heroes, result=result)
 
 
 @app.route("/fight/pass-turn")
@@ -56,7 +61,12 @@ def pass_turn():
     # TODO кнопка пропус хода
     # TODO логика пркатикчески идентична предыдущему эндпоинту
     # TODO однако вызываем здесь функцию следующий ход (arena.next_turn())
-    pass
+    if arena.game_is_running:
+        result = arena.next_turn()
+    else:
+        result = arena.battle_result
+
+    return render_template('fight.html', heroes=heroes, result=result)
 
 
 @app.route("/fight/end-fight")
