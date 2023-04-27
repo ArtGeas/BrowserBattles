@@ -102,7 +102,7 @@ def choose_hero():
         armor_name = request.form['armor']
         unit_class_name = request.form['unit_class']
 
-        player = PlayerUnit(name=name, unit_class=unit_class_name)
+        player = PlayerUnit(name=name, unit_class=unit_classes.get(unit_class_name))
         player.equip_armor(Equipment.get_armor(armor_name))
         player.equip_weapon(Equipment.get_weapon(weapon_name))
 
@@ -136,7 +136,7 @@ def choose_enemy():
         armor_name = request.form['armor']
         unit_class_name = request.form['unit_class']
 
-        enemy = EnemyUnit(name=name, unit_class=unit_class_name)
+        enemy = EnemyUnit(name=name, unit_class=unit_classes.get(unit_class_name))
         enemy.equip_armor(Equipment.get_armor(armor_name))
         enemy.equip_weapon(Equipment.get_weapon(weapon_name))
 
