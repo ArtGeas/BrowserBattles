@@ -88,7 +88,7 @@ class BaseUnit(ABC):
         if self._is_skill_used:
             return 'Навык использован.'
         else:
-            result = self.unit_class.skill.use(self, target)
+            result = self.unit_class.skill.use(user=self, target=target)
             self._is_skill_used = True
             return result
 
