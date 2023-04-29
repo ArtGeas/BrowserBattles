@@ -98,7 +98,7 @@ def choose_hero():
         }
         return render_template('hero_choosing.html', result=result)
     if request.method == 'POST':
-        name = request.form['form']
+        name = request.form['name']
         weapon_name = request.form['weapon']
         armor_name = request.form['armor']
         unit_class_name = request.form['unit_class']
