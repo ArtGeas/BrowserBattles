@@ -44,12 +44,12 @@ class Equipment:
         # TODO возвращает объект оружия по имени
         try:
             weapon_index = self.equipment.weapons.index(weapon_name)
-            weapon: dict = self.equipment.weapons[weapon_index]
-            return Weapon(id=weapon['id'],
-                          name=weapon['name'],
-                          min_damage=weapon['min_damage'],
-                          max_damage=weapon['max_damage'],
-                          stamina_per_hit=weapon['stamina_per_hit'])
+            weapon = self.equipment.weapons[weapon_index]
+            return Weapon(id=weapon.id,
+                          name=weapon.name,
+                          min_damage=weapon.min_damage,
+                          max_damage=weapon.max_damage,
+                          stamina_per_hit=weapon.stamina_per_hit)
         except ValueError:
             print('ValueError')
 
@@ -57,11 +57,11 @@ class Equipment:
         # TODO возвращает объект брони по имени
         try:
             armor_index = self.equipment.armors.index(armor_name)
-            armor: dict = self.equipment.armors[armor_index]
-            return Armor(id=armor['id'],
-                         name=armor['name'],
-                         defence=armor['defence'],
-                         stamina_per_turn=armor['stamina_per_turn'])
+            armor = self.equipment.armors[armor_index]
+            return Armor(id=armor.id,
+                         name=armor.name,
+                         defence=armor.defence,
+                         stamina_per_turn=armor.stamina_per_turn)
         except ValueError:
             print('ValueError')
 
