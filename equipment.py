@@ -70,7 +70,7 @@ class Equipment:
         try:
             weapon_list: list = []
             for weapon in self.equipment.weapons:
-                weapon_list.append(weapon['name'])
+                weapon_list.append(weapon.name)
             return weapon_list
         except ValueError:
             print('ValueError')
@@ -80,7 +80,7 @@ class Equipment:
         try:
             armor_list: list = []
             for armor in self.equipment.armors:
-                armor_list.append(armor['name'])
+                armor_list.append(armor.name)
             return armor_list
         except ValueError:
             print('ValueError')
