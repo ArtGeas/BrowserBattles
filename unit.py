@@ -139,7 +139,7 @@ class EnemyUnit(BaseUnit):
         """
         # TODO результат функции должен возвращать результат функции skill.use или же следующие строки:
 
-        using_skill = bool(randint(1, 0))
+        using_skill = bool(randint(0, 1))
         if using_skill:
             if not self._is_skill_used:
                 self.unit_class.skill.use(user=self, target=target)
