@@ -104,8 +104,8 @@ def choose_hero():
         unit_class_name = request.form['unit_class']
 
         player = PlayerUnit(name=name, unit_class=unit_classes.get(unit_class_name))
-        player.equip_armor(Equipment.get_armor(armor_name))
-        player.equip_weapon(Equipment.get_weapon(weapon_name))
+        player.equip_armor(Equipment().get_armor(armor_name))
+        player.equip_weapon(Equipment().get_weapon(weapon_name))
 
         heroes['player'] = player
         return redirect(url_for('choose_enemy'))
@@ -139,8 +139,8 @@ def choose_enemy():
         unit_class_name = request.form['unit_class']
 
         enemy = EnemyUnit(name=name, unit_class=unit_classes.get(unit_class_name))
-        enemy.equip_armor(Equipment.get_armor(armor_name))
-        enemy.equip_weapon(Equipment.get_weapon(weapon_name))
+        enemy.equip_armor(Equipment().get_armor(armor_name))
+        enemy.equip_weapon(Equipment().get_weapon(weapon_name))
 
         heroes['enemy'] = enemy
         return redirect(url_for('start_fight'))
