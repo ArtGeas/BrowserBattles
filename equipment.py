@@ -59,9 +59,9 @@ class Equipment:
             armor_index = self.equipment.armors.index(armor_name)
             armor: dict = self.equipment.armors[armor_index]
             return Armor(id=armor['id'],
-                          name=armor['name'],
-                          defence=armor['defence'],
-                          stamina_per_turn=armor['stamina_per_turn'])
+                         name=armor['name'],
+                         defence=armor['defence'],
+                         stamina_per_turn=armor['stamina_per_turn'])
         except ValueError:
             print('ValueError')
 
@@ -88,7 +88,7 @@ class Equipment:
     @staticmethod
     def _get_equipment_data() -> EquipmentData:
         # TODO этот метод загружает json в переменную EquipmentData
-        with open("./data/equipment.json") as equipment_file:
+        with open("./data/equipment.json", encoding='utf-8') as equipment_file:
             data = json.load(equipment_file)
 
         equipment_schema = marshmallow_dataclass.class_schema(EquipmentData)
