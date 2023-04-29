@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 from random import uniform
 import marshmallow_dataclass
 import marshmallow
@@ -40,28 +40,29 @@ class Equipment:
     def __init__(self):
         self.equipment = self._get_equipment_data()
 
-    def get_weapon(self, weapon_name) -> Weapon:
+    def get_weapon(self, weapon_name) -> Optional[Weapon]:
         # TODO возвращает объект оружия по имени
         try:
-            weapon_index = self.equipment.weapons.index(weapon_name)
-            weapon = self.equipment.weapons[weapon_index]
-            return Weapon(id=weapon.id,
-                          name=weapon.name,
-                          min_damage=weapon.min_damage,
-                          max_damage=weapon.max_damage,
-                          stamina_per_hit=weapon.stamina_per_hit)
+            for weapon in self.equipment.weapons:
+                if weapon.name == weapon_name:
+                    return Weapon(id=weapon.id,
+                                  name=weapon.name,
+                                  min_damage=weapon.min_damage,
+                                  max_damage=weapon.max_damage,
+                                  stamina_per_hit=weapon.stamina_per_hit)
+
         except ValueError:
             print('ValueError')
 
-    def get_armor(self, armor_name) -> Armor:
+    def get_armor(self, armor_name) -> Optional[Armor]:
         # TODO возвращает объект брони по имени
         try:
-            armor_index = self.equipment.armors.index(armor_name)
-            armor = self.equipment.armors[armor_index]
-            return Armor(id=armor.id,
-                         name=armor.name,
-                         defence=armor.defence,
-                         stamina_per_turn=armor.stamina_per_turn)
+            for armor in self.equipment.armors:
+                if armor.name == armor_name:
+                    return Armor(id=armor.id,
+                                 name=armor.name,
+                                 defence=armor.defence,
+                                 stamina_per_turn=armor.stamina_per_turn)
         except ValueError:
             print('ValueError')
 
