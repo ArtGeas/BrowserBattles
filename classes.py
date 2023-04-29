@@ -19,7 +19,7 @@ WarriorClass = UnitClass(name="Воин",
                          attack=0.8,
                          stamina=0.9,
                          armor=1.2,
-                         skill=FuryPunch)  # TODO Инициализируем экземпляр класса UnitClass и присваиваем ему необходимые значения аттрибуотов
+                         skill=FuryPunch())  # TODO Инициализируем экземпляр класса UnitClass и присваиваем ему необходимые значения аттрибуотов
 
 ThiefClass = UnitClass(name="Вор",
                        max_health=50.0,
@@ -27,7 +27,7 @@ ThiefClass = UnitClass(name="Вор",
                        attack=1.5,
                        stamina=1.2,
                        armor=1.0,
-                       skill=HardShot)  # TODO действуем так же как и с войном
+                       skill=HardShot())  # TODO действуем так же как и с войном
 
 unit_classes = {
     ThiefClass.name: ThiefClass,
