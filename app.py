@@ -38,7 +38,7 @@ def hit():
     # TODO если игра идет - вызываем метод player.hit() экземпляра класса арены
     # TODO если игра не идет - пропускаем срабатывание метода (простот рендерим шаблон с текущими данными)
     if arena.game_is_running:
-        result = arena.player.hit(arena.enemy)
+        result = arena.player_hit()
     else:
         result = arena.battle_result
 
