@@ -142,8 +142,8 @@ class EnemyUnit(BaseUnit):
         using_skill = bool(randint(0, 1))
         if using_skill:
             if not self._is_skill_used:
-                self.unit_class.skill.use(user=self, target=target)
                 self._is_skill_used = True
+                return self.unit_class.skill.use(user=self, target=target)
             else:
                 return self._hit_checkout(target)
         else:
