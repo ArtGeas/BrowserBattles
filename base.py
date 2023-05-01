@@ -33,8 +33,8 @@ class Arena(metaclass=BaseSingleton):
         # TODO Игрок проиграл битву, Игрок выиграл битву, Ничья и сохраняем его в аттрибуте (self.battle_result)
         # TODO если Здоровья игроков в порядке то ничего не происходит
 
-        #if self.player.hp > 0 and self.enemy.hp > 0:
-        #    return None
+        if self.player.hp > 0 and self.enemy.hp > 0:
+            return None
 
         if self.player.hp <= 0 and self.enemy.hp <= 0:
             self.battle_result = 'Ничья'
