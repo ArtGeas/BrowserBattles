@@ -60,6 +60,8 @@ class BaseUnit(ABC):
 
         self.stamina = self.stamina - self.weapon.stamina_per_hit
         damage = attack_damage - target_armor
+        if damage < 0:
+            damage = 0
         target.get_damage(damage)
 
         return damage
